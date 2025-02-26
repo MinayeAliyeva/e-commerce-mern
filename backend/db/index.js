@@ -1,19 +1,12 @@
+require("dotenv").config(); // dotenv modulunu çağırırıq
 const mongoose = require("mongoose");
-
-const connectInfo = {
-  USER_NAME: "eliyevaminayee",
-  PASSWORD: "minaye12345",
-  DATABASE_NAME: "e-commerce-react",
-};
 
 const connetctionDb = async () => {
   try {
-    await mongoose.connect(
-      `mongodb+srv://${connectInfo?.USER_NAME}:${connectInfo?.PASSWORD}@cluster0.3tjld.mongodb.net/?retryWrites=true&w=majority`
-    );
-    console.log("mongodb baglantisi kuruldu");
+    await mongoose.connect(process.env.MONGODB_URL); // MONGODB_URL dəyərini .env-dən oxuyur
+    console.log("MongoDB bağlantısı uğurla quruldu");
   } catch (error) {
-    console.log(error);
+    console.log("MongoDB bağlantı xətası:", error);
   }
 };
 
